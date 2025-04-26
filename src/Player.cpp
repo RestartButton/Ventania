@@ -19,6 +19,7 @@ void Player::handleInput(char input) {
             break;
     }
 }
+
 void Player::update() {
     if(up) 
         posY -= speed;
@@ -28,7 +29,25 @@ void Player::update() {
         posX -= speed;
     if(right)
         posX += speed;
+
+    if(posY < 0)
+        posY = 0;
+    if(posX < 0)
+        posX = 0;
+    if(posY + height >= map->getHeight())
+        posY = map->getHeight() - height - 1;
+    if(posX + width >= map->getWidth())
+        posX = map->getWidth() - width - 1;
+
+    if(lifePoints < 0)
+        lifePoints = 0;
+
+    up = false;
+    down = false;
+    left = false;
+    right = false;
 }
+
 void Player::render() {}
 
 void Player::save(std::ostream& out) const {

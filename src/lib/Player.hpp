@@ -1,7 +1,7 @@
 #include "Entity.hpp"
 #include "Serializable.hpp"
 
-enum ItemType {
+enum Key_code {
     ARROW_UP = 72,
     ARROW_DOWN = 80,
     ARROW_LEFT = 75,

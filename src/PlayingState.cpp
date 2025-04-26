@@ -6,12 +6,11 @@
 PlayingState::PlayingState()
     : bag(), cur_map(), player(0, 0, 1, 1)
 {
-    cur_map.loadFromFile("maps/2.map");
+    cur_map.loadFromFile("maps/1.map");
     player.map = &cur_map;
 }
 
 void PlayingState::handleInput(char input) {
-    std::cout << "3";
     if (input == 'b') {
         std::cout << "-> Voltando para o Menu...\n";
         exitRequested = true;
@@ -21,20 +20,28 @@ void PlayingState::handleInput(char input) {
     } else if (input == 's') {
         std::cout << "-> Iniciando Salvamento...\n";
         game->pushState(std::make_unique<SavingState>(*this));
+    } else if (input == 'p') {
+        auto pposition = player.getPos();
+        int x = static_cast<int>(std::round(pposition.first));
+        int y = static_cast<int>(std::round(pposition.second));
+        std::cout << "x..." << x << "\n";
+        std::cout << "y..." << y << "\n";
+        system("pause");
     } else {
         player.handleInput(input);
     }
-    std::cout << "4";
 }
 
 void PlayingState::update() {
-    // auto pposition = player.getPos();
-    // int x = static_cast<int>(std::round(pposition.first));
-    // int y = static_cast<int>(std::round(pposition.second));
-    // Tile cur_tile = cur_map.getTile(x, y);
-    // if(cur_tile.currentTileID == 3) {
-    //     cur_map.loadFromFile("maps/2.map");
-    // }
+    auto pposition = player.getPos();
+    int x = static_cast<int>(std::round(pposition.first));
+    int y = static_cast<int>(std::round(pposition.second));
+    Tile cur_tile = cur_map.getTile(x, y);
+    if(cur_tile.currentTileID == 3) {
+        cur_map.loadFromFile("maps/2.map");
+    }
+
+    player.update();
 }
 
 void PlayingState::render() {

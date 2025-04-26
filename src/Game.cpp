@@ -41,6 +41,8 @@ void Game::gameLoop() {
 
         if (_kbhit()) {
             char input = _getch(); // Captura tecla pressionada sem Enter
+            if (input == 0 || input == 224)
+                input = _getch(); // Captura o real código se for tecla especial
             state->handleInput(input);
         }
         

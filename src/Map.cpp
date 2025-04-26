@@ -35,13 +35,12 @@ bool Map::loadFromFile(const std::string& filename) {
 }
 
 Tile& Map::getTile(int x, int y) {
-    if(x < 0 || y < 0) {
+    if(x >= 0 && y >= 0) {
         if(x < width && y < height) {
             return tiles[y][x];
-        } else {
-            throw "Out of Bounds";
         }
     }
+    throw "Out of Bounds";
 }
 
 void Map::setTile(int x, int y, int newTileID) {
