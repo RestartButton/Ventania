@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include "Game.hpp"
 #include "MenuState.hpp"
 
